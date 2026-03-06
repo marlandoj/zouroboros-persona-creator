@@ -16,6 +16,7 @@ A reusable blueprint for creating sophisticated AI personas on Zo Computer. This
 - **Automated Tools** - Scripts to generate complete persona setups
 - **Best Practices** - Learn from financial advisor implementation
 - **Domain Adaptation** - Customize for any field
+- **52 Reference Agents** - Built on the [Agency Agents](https://github.com/msitarzewski/agency-agents) framework
 
 ## Quick Start
 
@@ -54,6 +55,37 @@ Just need a quick reminder? See [`QUICKSTART.md`](QUICKSTART.md).
 2. Identify the persona's expertise (advisor, analyst, researcher)
 3. List the desired capabilities (data, analysis, recommendations)
 4. Identify potential risks
+5. **Browse [Agency Agents](https://github.com/msitarzewski/agency-agents) for reference personas** in your target domain
+
+### Using Agency Agents as Starting Points
+
+The [Agency Agents](https://github.com/msitarzewski/agency-agents) repo provides 52 battle-tested agent personalities across 9 divisions (Engineering, Design, Marketing, Product, Project Management, Testing, Support, Spatial Computing, Specialized). Each agent file includes:
+
+- **Identity & Memory** — Personality traits, communication style, expertise areas
+- **Core Mission** — Detailed deliverables and step-by-step workflows
+- **Critical Rules** — Domain-specific constraints and guardrails
+- **Success Metrics** — Measurable outcomes and quality standards
+
+Browse agents to find a reference personality for your persona:
+
+```bash
+# Clone agency-agents if not already present
+git clone https://github.com/msitarzewski/agency-agents.git
+
+# Browse by division
+ls agency-agents/engineering/
+ls agency-agents/design/
+ls agency-agents/marketing/
+
+# Read a specific agent for reference
+cat agency-agents/design/design-brand-guardian.md
+```
+
+You can also ask Zo in natural language:
+
+```
+Show me agency-agents that would be relevant for a customer support persona.
+```
 
 ### Planning Template:
 ```bash
@@ -62,6 +94,7 @@ Just need a quick reminder? See [`QUICKSTART.md`](QUICKSTART.md).
 # 2. What expertise? (advisor, analyst, researcher)
 # 3. What capabilities? (data, analysis, recommendations)
 # 4. What risks? (what could go wrong)
+# 5. Which agency-agents reference persona(s) to base on? (optional)
 ```
 
 ## Phase 2: Copying the Template
@@ -350,6 +383,8 @@ main();
 - `references/TROUBLESHOOTING.md` - Common issues and solutions
 - `references/MCP-REFERENCE.md` - MCP server documentation
 - `examples/` - Domain-specific examples
+- [Agency Agents](https://github.com/msitarzewski/agency-agents) - 52 reference agent personalities (MIT) by [@msitarzewski](https://github.com/msitarzewski)
+- [README.md](README.md) - Implementation guide with Zo chat and terminal workflows
 
 ## Support
 
@@ -358,6 +393,7 @@ For issues or enhancements:
 2. Review examples in `examples/`
 3. Follow the 8-phase process step-by-step
 
-## Note
+## Notes
 
-The swarm orchestrator skill has been renamed to zo-swarm-orchestrator; repo: https://github.com/marlandoj/zo-swarm-orchestrator.
+- The swarm orchestrator skill has been renamed to zo-swarm-orchestrator; repo: https://github.com/marlandoj/zo-swarm-orchestrator.
+- This skill uses [Agency Agents](https://github.com/msitarzewski/agency-agents) by [@msitarzewski](https://github.com/msitarzewski) as a reference framework for agent personality patterns and domain specializations.
