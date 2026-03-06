@@ -17,6 +17,7 @@ A reusable blueprint for creating sophisticated AI personas on Zo Computer. This
 - **Best Practices** - Learn from financial advisor implementation
 - **Domain Adaptation** - Customize for any field
 - **52 Reference Agents** - Built on the [Agency Agents](https://github.com/msitarzewski/agency-agents) framework
+- **SkillsMP Integration** - Search the [Skills Marketplace](https://skillsmp.com) for community skills via REST API
 
 ## Quick Start
 
@@ -87,6 +88,31 @@ You can also ask Zo in natural language:
 Show me agency-agents that would be relevant for a customer support persona.
 ```
 
+### Searching SkillsMP for Existing Skills
+
+Before building from scratch, check whether someone has already published a skill for your domain on [SkillsMP](https://skillsmp.com):
+
+**From Zo chat:**
+```
+Search SkillsMP for skills related to "financial advisor"
+```
+
+**From terminal:**
+```bash
+cd Skills/zo-persona-creator/scripts
+
+# Keyword search
+bun skillsmp.ts search "financial advisor"
+
+# AI semantic search (finds conceptually related skills)
+bun skillsmp.ts ai-search "How to build a persona that gives investment advice"
+
+# Sort by popularity
+bun skillsmp.ts search "healthcare" --sort stars --limit 10
+```
+
+Requires a free API key from [skillsmp.com/docs/api](https://skillsmp.com/docs/api). Add it in Settings > Developers as `SKILLSMP_API_KEY`.
+
 ### Planning Template:
 ```bash
 # Answer these questions:
@@ -95,6 +121,7 @@ Show me agency-agents that would be relevant for a customer support persona.
 # 3. What capabilities? (data, analysis, recommendations)
 # 4. What risks? (what could go wrong)
 # 5. Which agency-agents reference persona(s) to base on? (optional)
+# 6. Are there existing skills on SkillsMP to build on? (optional)
 ```
 
 ## Phase 2: Copying the Template
@@ -335,6 +362,7 @@ main();
 | `scripts/setup-persona.ts` | Automated setup (non-interactive) |
 | `scripts/interactive-setup.ts` | Interactive setup (guided prompts) |
 | `scripts/validate-persona.ts` | Validate persona setup |
+| `scripts/skillsmp.ts` | Search SkillsMP marketplace via API |
 
 ### Templates
 | File | Purpose |
@@ -410,6 +438,71 @@ main();
 2. Test in isolation
 3. Deploy incrementally
 
+## SkillsMP API Integration
+
+This skill includes a client for the [SkillsMP](https://skillsmp.com) REST API, which lets you search the community skills marketplace during the planning phase or anytime you want to discover existing skills.
+
+### Setup
+
+1. Get a free API key at [skillsmp.com/docs/api](https://skillsmp.com/docs/api)
+2. Add it in [Settings > Developers](/?t=settings&s=developers) as `SKILLSMP_API_KEY`
+
+### Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/v1/skills/search?q=<query>` | Keyword search with pagination and sorting |
+| `GET /api/v1/skills/ai-search?q=<query>` | AI semantic search (Cloudflare AI) |
+
+### Usage
+
+**From Zo chat (natural language):**
+```
+Search SkillsMP for "SEO" skills
+Find skills on SkillsMP related to building a web scraper
+```
+
+**From terminal:**
+```bash
+cd Skills/zo-persona-creator/scripts
+
+# Keyword search
+bun skillsmp.ts search "SEO"
+
+# AI semantic search
+bun skillsmp.ts ai-search "How to create a web scraper"
+
+# Paginate and sort
+bun skillsmp.ts search "financial" --sort stars --limit 10 --page 2
+
+# Check API status and quota
+bun skillsmp.ts status
+```
+
+### Search Options
+
+| Option | Description |
+|--------|-------------|
+| `--page <N>` | Page number (default: 1) |
+| `--limit <N>` | Results per page (default: 20, max: 100) |
+| `--sort <field>` | Sort by: `stars` or `recent` |
+
+### Rate Limits
+
+- 500 requests per day per API key (resets at midnight UTC)
+- Wildcard searches (e.g., `*`) are not supported
+- Response headers `X-RateLimit-Daily-Limit` and `X-RateLimit-Daily-Remaining` track quota usage
+
+### Error Codes
+
+| Code | HTTP | Meaning |
+|------|------|---------|
+| `MISSING_API_KEY` | 401 | API key not provided |
+| `INVALID_API_KEY` | 401 | Invalid API key |
+| `MISSING_QUERY` | 400 | Missing search query |
+| `DAILY_QUOTA_EXCEEDED` | 429 | Daily limit reached |
+| `INTERNAL_ERROR` | 500 | Server error |
+
 ## Resources
 
 - `references/MANUAL-SETUP-GUIDE.md` - Detailed manual steps
@@ -417,6 +510,7 @@ main();
 - `references/MCP-REFERENCE.md` - MCP server documentation
 - `examples/` - Domain-specific examples
 - [Agency Agents](https://github.com/msitarzewski/agency-agents) - 52 reference agent personalities (MIT) by [@msitarzewski](https://github.com/msitarzewski)
+- [SkillsMP](https://skillsmp.com) - Community skills marketplace with [REST API](https://skillsmp.com/docs/api)
 - [README.md](README.md) - Implementation guide with Zo chat and terminal workflows
 
 ## Support

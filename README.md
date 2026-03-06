@@ -15,54 +15,7 @@ This skill provides everything you need to create production-ready AI personas o
 - **Automated Setup Scripts** — Generate a complete persona in 2 minutes
 - **52 Reference Agents** — Built on the [Agency Agents](https://github.com/msitarzewski/agency-agents) framework for proven personality patterns
 - **Domain Adaptation Guides** — Customize for financial, healthcare, legal, creative, and more
-- **Cross-Platform Compatible** — Works on Zo Computer, Claude Code, OpenClaw, and any markdown-aware agent platform
-
----
-
-## Installation
-
-### Via Zo Chat (natural language)
-
-Open your Zo chat window and type:
-
-```
-Clone the zo-persona-creator skill from GitHub into my Skills folder.
-Repo: https://github.com/marlandoj/zo-persona-creator
-```
-
-Zo will clone the repo and place it at `Skills/zo-persona-creator/`.
-
-To also install the Agency Agents reference library:
-
-```
-Also clone the agency-agents repo from https://github.com/msitarzewski/agency-agents
-into my workspace so I can use them as reference personas.
-```
-
-### Via Terminal
-
-```bash
-# Clone the skill into your Skills directory
-cd /home/workspace/Skills
-git clone https://github.com/marlandoj/zo-persona-creator.git
-
-# (Optional) Clone the Agency Agents reference library
-cd /home/workspace
-git clone https://github.com/msitarzewski/agency-agents.git
-```
-
-### Verify Installation
-
-```bash
-ls Skills/zo-persona-creator/
-# Should show: SKILL.md  QUICKSTART.md  README.md  assets/  examples/  references/  scripts/
-```
-
-Or via Zo chat:
-
-```
-Show me the contents of Skills/zo-persona-creator/
-```
+- **SkillsMP Marketplace Search** — Find community-built skills via the [SkillsMP REST API](https://skillsmp.com/docs/api)
 
 ---
 
@@ -87,6 +40,24 @@ Zo will read the skill instructions, run the setup scripts, and walk you through
 - *"Validate my Health Coach persona setup"*
 
 Zo handles file creation, persona registration, rule creation, and documentation automatically.
+
+### Search SkillsMP First
+
+Before building from scratch, check if a community skill already exists:
+
+```
+Search SkillsMP for skills related to "healthcare advisor"
+```
+
+Or from terminal:
+
+```bash
+cd Skills/zo-persona-creator/scripts
+bun skillsmp.ts search "healthcare advisor"
+bun skillsmp.ts ai-search "How to build a health coaching persona"
+```
+
+Requires a free API key from [skillsmp.com/docs/api](https://skillsmp.com/docs/api). Add it in Settings > Developers as `SKILLSMP_API_KEY`.
 
 ### Option 2: Terminal (CLI Scripts)
 
@@ -179,6 +150,44 @@ Name it "Growth Analyst" and add safety rules for data privacy.
 
 ---
 
+## Searching SkillsMP
+
+[SkillsMP](https://skillsmp.com) is a community marketplace of AI skills. This skill includes a client script that lets you search it during planning or anytime you need inspiration.
+
+### Setup
+
+1. Get a free API key at [skillsmp.com/docs/api](https://skillsmp.com/docs/api)
+2. Add it in [Settings > Developers](/?t=settings&s=developers) as `SKILLSMP_API_KEY`
+
+### From Zo Chat
+
+```
+Search SkillsMP for "SEO" skills
+Find skills on SkillsMP about building a web scraper
+```
+
+### From Terminal
+
+```bash
+cd Skills/zo-persona-creator/scripts
+
+# Keyword search
+bun skillsmp.ts search "SEO"
+
+# AI semantic search — finds conceptually related skills
+bun skillsmp.ts ai-search "How to create a web scraper"
+
+# Sort by popularity, paginate
+bun skillsmp.ts search "financial" --sort stars --limit 10
+
+# Check API status and remaining quota
+bun skillsmp.ts status
+```
+
+**Rate limit:** 500 requests/day per API key. See [full API docs](https://skillsmp.com/docs/api) for details.
+
+---
+
 ## The 8-Phase Process
 
 | Phase | Goal | Key Actions |
@@ -206,7 +215,8 @@ zo-persona-creator/
 ├── scripts/
 │   ├── setup-persona.ts                  # Automated setup (non-interactive)
 │   ├── interactive-setup.ts              # Guided setup with prompts
-│   └── validate-persona.ts              # Validate persona health
+│   ├── validate-persona.ts              # Validate persona health
+│   └── skillsmp.ts                      # Search SkillsMP marketplace via API
 ├── assets/
 │   ├── persona-prompt-template.md        # Customizable persona prompt
 │   ├── safety-rules-template.md          # Domain safety rules
@@ -352,6 +362,7 @@ These principles are baked into every template and script:
 
 - [**Agency Agents**](https://github.com/msitarzewski/agency-agents) — 52 reference agent personalities (MIT)
 - [**Zo Computer**](https://zo.computer) — The platform this skill is built for
+- [**SkillsMP**](https://skillsmp.com) — Community skills marketplace with [REST API](https://skillsmp.com/docs/api)
 - [**Agent Skills Spec**](https://agentskills.io/specification) — The skill format standard
 - [`SKILL.md`](SKILL.md) — Full 8-phase creation guide
 - [`QUICKSTART.md`](QUICKSTART.md) — 5-minute quick reference

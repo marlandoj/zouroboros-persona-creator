@@ -54,7 +54,43 @@ async function collectConfig(): Promise<PersonaConfig> {
   log(`Generated slug: ${slug}`, "info");
 
   const domain = await question("Domain (e.g., healthcare, financial, legal, creative)") || "general";
-  
+
+  // Offer SkillsMP search
+  const wantSearch = await confirm("Search SkillsMP for existing skills in this domain?");
+  if (wantSearch) {
+    const skillsmpKey = process.env.SKILLSMP_API_KEY;
+    if (!skillsmpKey) {
+      log("SKILLSMP_API_KEY not set. Get a free key at https://skillsmp.com/docs/api", "warning");
+      log("Add it in Settings > Developers as SKILLSMP_API_KEY, then re-run.", "warning");
+    } else {
+      const searchQuery = await question(`Search query (default: "${domain}")`) || domain;
+      log(`Searching SkillsMP for "${searchQuery}"...`, "info");
+      try {
+        const res = await fetch(
+          `https://skillsmp.com/api/v1/skills/search?q=${encodeURIComponent(searchQuery)}&limit=5`,
+          { headers: { Authorization: `Bearer ${skillsmpKey}` } }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          if (data.data?.length) {
+            console.log(`\nFound ${data.data.length} skill(s):\n`);
+            for (const skill of data.data) {
+              console.log(`  - ${skill.name || skill.title || "Untitled"}`);
+              if (skill.description) console.log(`    ${skill.description.slice(0, 100)}`);
+            }
+            console.log();
+          } else {
+            log("No matching skills found. You'll be creating something new!", "info");
+          }
+        } else {
+          log(`SkillsMP returned HTTP ${res.status}. Continuing with setup.`, "warning");
+        }
+      } catch (e: any) {
+        log(`Could not reach SkillsMP: ${e.message}. Continuing with setup.`, "warning");
+      }
+    }
+  }
+
   console.log("\nEnter 3 areas of expertise (press Enter to skip remaining):");
   const expertise: string[] = [];
   for (let i = 1; i <= 3; i++) {
