@@ -5,7 +5,7 @@ Create a new AI persona in 5 minutes.
 ## ⚡ Super Quick Start (Automated)
 
 ```bash
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun setup-persona.ts "My Persona Name" my-domain
 ```
 
@@ -26,7 +26,7 @@ Answer these questions:
 ### Step 2: Run Setup Script (1 min)
 
 ```bash
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun setup-persona.ts "Health Coach" healthcare
 ```
 

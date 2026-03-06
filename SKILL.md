@@ -1,5 +1,5 @@
 ---
-name: persona-creation-template-skill
+name: zo-persona-creator
 description: Generalized blueprint for creating sophisticated personas on Zo Computer with safety rules, skills, MCP servers, and enhancement tools. Adaptable to any domain.
 compatibility: Created for Zo Computer
 metadata:
@@ -7,7 +7,7 @@ metadata:
   created: 2026-02-07
   version: 1.0.0
 ---
-# Persona Creation Template Skill
+# Zo Persona Creator
 
 A reusable blueprint for creating sophisticated AI personas on Zo Computer. This template provides:
 
@@ -24,14 +24,14 @@ Choose your path based on your preference:
 
 ### Option 1: Interactive Setup (Easiest - 5 minutes)
 ```bash
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun interactive-setup.ts
 ```
 Follow the guided prompts to create your complete persona setup.
 
 ### Option 2: Automated Setup (Fast - 2 minutes)
 ```bash
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun setup-persona.ts "Health Coach" healthcare
 ```
 Generates all files automatically. Then customize as needed.
@@ -107,7 +107,7 @@ Show me agency-agents that would be relevant for a customer support persona.
 
 ### Copying Template:
 ```bash
-cp -r Skills/persona-creation-template-skill Skills/<your-persona>-skill
+cp -r Skills/zo-persona-creator Skills/<your-persona>-skill
 cd Skills/<your-persona>-skill
 ```
 

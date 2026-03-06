@@ -196,7 +196,7 @@ async function createSkillScript(config: PersonaConfig): Promise<void> {
   const scriptPath = `${skillDir}/scripts/${config.slug}.ts`;
 
   // Read template
-  const templatePath = "/home/workspace/Skills/persona-creation-template-skill/assets/skill-template.ts";
+  const templatePath = "/home/workspace/Skills/zo-persona-creator/assets/skill-template.ts";
   let template = await Bun.file(templatePath).text();
 
   // Replace placeholders

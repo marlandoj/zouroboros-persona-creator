@@ -206,6 +206,6 @@ main();
 
 ## Resources
 
-- Main template: `Skills/persona-creation-template-skill/`
+- Main template: `Skills/zo-persona-creator/`
 - Safety rules: `assets/safety-rules-template.md`
 - Full guide: `references/MANUAL-SETUP-GUIDE.md`

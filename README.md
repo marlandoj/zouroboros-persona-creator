@@ -1,4 +1,4 @@
-# Persona Creation Template Skill
+# Zo Persona Creator
 
 > A reusable blueprint for creating sophisticated AI personas on [Zo Computer](https://zo.computer). Includes an 8-phase creation process, pre-built templates, automated setup scripts, and safety-first architecture — adaptable to any domain.
 
@@ -45,21 +45,21 @@ Zo handles file creation, persona registration, rule creation, and documentation
 #### Interactive Setup (guided prompts, ~5 min)
 
 ```bash
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun interactive-setup.ts
 ```
 
 #### Automated Setup (one command, ~2 min)
 
 ```bash
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun setup-persona.ts "Health Coach" healthcare
 ```
 
 #### Validate an Existing Persona
 
 ```bash
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun validate-persona.ts health-coach-skill
 ```
 
@@ -144,7 +144,7 @@ For the full walkthrough, see [`SKILL.md`](SKILL.md) or [`references/MANUAL-SETU
 ## Repository Structure
 
 ```
-persona-creation-template-skill/
+zo-persona-creator/
 ├── SKILL.md                              # Complete guide (8-phase process)
 ├── QUICKSTART.md                         # 5-minute quick reference
 ├── README.md                             # This file
@@ -191,7 +191,7 @@ Zo will:
 cat agency-agents/design/design-brand-guardian.md
 
 # 2. Generate the persona scaffold
-cd Skills/persona-creation-template-skill/scripts
+cd Skills/zo-persona-creator/scripts
 bun setup-persona.ts "Brand Guardian" design
 
 # 3. Customize using the agency-agents personality as reference
