@@ -1,6 +1,8 @@
-# Zo Persona Creator
+# Zouroboros Persona Creator
 
 > A reusable blueprint for creating sophisticated AI personas on [Zo Computer](https://zo.computer). Includes an 8-phase creation process, pre-built templates, automated setup scripts, and safety-first architecture — adaptable to any domain.
+>
+> Part of the [Zouroboros](https://github.com/marlandoj) ecosystem — self-improving AI development tools for Zo Computer.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -208,7 +210,7 @@ For the full walkthrough, see [`SKILL.md`](SKILL.md) or [`references/MANUAL-SETU
 ## Repository Structure
 
 ```
-zo-persona-creator/
+zouroboros-persona-creator/
 ├── SKILL.md                              # Complete guide (8-phase process)
 ├── QUICKSTART.md                         # 5-minute quick reference
 ├── README.md                             # This file
