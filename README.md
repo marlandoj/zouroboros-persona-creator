@@ -1,3 +1,7 @@
+> **⚠️ DEPRECATED** — This repository has been archived. All code has been migrated to the [Zouroboros monorepo](https://github.com/marlandoj/Zouroboros) under `packages/persona-creator/`. Please open issues and PRs there.
+
+---
+
 # Zouroboros Persona Creator
 
 > A reusable blueprint for creating sophisticated AI personas on [Zo Computer](https://zo.computer). Includes an 8-phase creation process, pre-built templates, automated setup scripts, and safety-first architecture — adaptable to any domain.
